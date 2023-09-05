@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
 export default function NoteList() {
-  // Initialize state to hold the list of notes
+  
   const [notes, setNotes] = useState([]);
   
-  // Fetch notes from your backend API when the component mounts
+  
   useEffect(() => {
-    fetch('/api/notes') // Replace with your actual API endpoint
+    fetch('/api/notes') 
       .then((response) => response.json())
       .then((data) => setNotes(data))
       .catch((error) => console.error('Error fetching notes:', error));

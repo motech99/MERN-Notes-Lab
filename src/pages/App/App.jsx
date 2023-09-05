@@ -5,6 +5,7 @@ import './App.css';
 import AuthPage from '../AuthPage/AuthPage';
 import NavBar from '../../components/NavBar/NavBar';
 import NoteList from '../../components/NoteList/NoteList';
+import AddNote from '../../components/AddNoteForm/AddNoteForm';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -17,6 +18,7 @@ export default function App() {
             <Routes>
               {/* Route components in here */}
               <Route path="/notes" element={<NoteList />} />
+              <Route path="/add-note" element={<AddNote />} />
             </Routes>
 
           </>
