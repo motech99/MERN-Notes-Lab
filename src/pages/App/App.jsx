@@ -1,30 +1,35 @@
 import { useState } from 'react';
+import { getUser } from "../../utilities/users-service";
 import { Routes, Route } from 'react-router-dom';
-import { getUser } from '../../utilities/users-service';
+import AuthPage from "../AuthPage/AuthPage";
+import NewNotePage from "../NewNotePage/NewNotePage";
+import NotesListPage from "../NotesListPage/NotesListPage";
+import NavBar from "../../components/NavBar/NavBar";
+
 import './App.css';
-import AuthPage from '../AuthPage/AuthPage';
-import NavBar from '../../components/NavBar/NavBar';
-import NoteList from '../../components/NoteList/NoteList';
-import AddNote from '../../components/AddNoteForm/AddNoteForm';
 
 export default function App() {
+
   const [user, setUser] = useState(getUser());
 
+  const [notes, setNotes] = useState([]); 
+  
   return (
     <main className="App">
-      { user ?
-          <>
-            <NavBar user={user} setUser={setUser} />
+    { user ?
+        <>
+          <NavBar user={user} setUser={setUser}/>
             <Routes>
-              {/* Route components in here */}
-              <Route path="/notes" element={<NoteList />} />
-              <Route path="/add-note" element={<AddNote />} />
-            </Routes>
+              {/* Routes components in here */}
+              <Route path="/notes/new" element={<NewNotePage notes={notes} setNotes={setNotes}/>} />
+              <Route path="/notes" element={<NotesListPage user={user} notes={notes} setNotes={setNotes}/>} />
+          </Routes>
+        </> 
+        :
+        <AuthPage user={user} setUser={setUser} />
+    }
 
-          </>
-          :
-          <AuthPage setUser={setUser} />
-      }
     </main>
   );
 }
+
